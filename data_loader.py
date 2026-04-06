@@ -8,12 +8,10 @@ import os
 load_dotenv()
 
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-# ✅ nomic-embed-text is a dedicated embedding model — much faster & smaller than llama3
-# Run once: ollama pull nomic-embed-text
+
 EMBED_MODEL = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text")
 
-# ⚠️ Must match your Qdrant collection vector size
-# nomic-embed-text → 768 dims
+
 EMBED_DIM = 768
 
 splitter = RecursiveCharacterTextSplitter(
