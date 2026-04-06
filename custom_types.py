@@ -7,7 +7,7 @@ class RAGChunkAndSrc(pydantic.BaseModel):
 
 
 class RAGUpsertResult(pydantic.BaseModel):
-    ingested: int  # ✅ fixed: was "inngested" in main.py
+    ingested: int  
 
 
 class RAGSearchResult(pydantic.BaseModel):
