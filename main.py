@@ -13,7 +13,7 @@ from vector_db import QdrantStorage
 
 load_dotenv()
 
-# ✅ FREE local LLM via Ollama
+
 llm = OllamaLLM(model="llama3")
 
 inngest_client = inngest.Inngest(
@@ -24,9 +24,9 @@ inngest_client = inngest.Inngest(
 )
 
 
-# =============================================================================
-# 🔹 INGEST FUNCTION
-# =============================================================================
+
+#INGEST FUNCTION
+
 @inngest_client.create_function(
     fn_id="RAG: Ingest pdf",
     trigger=inngest.TriggerEvent(event="rag/ingest_pdf"),
@@ -63,7 +63,7 @@ async def rag_ingest_pdf(ctx: inngest.Context):
 
         QdrantStorage().upsert(ids, vecs, payloads)
 
-        # ✅ Fixed: was RAGUpsertResult(inngested=...) — double 'n' typo
+        
         return RAGUpsertResult(ingested=len(chunks))
 
     chunks_and_src = await ctx.step.run(
@@ -81,9 +81,9 @@ async def rag_ingest_pdf(ctx: inngest.Context):
     return result.model_dump()
 
 
-# =============================================================================
-# 🔹 QUERY FUNCTION
-# =============================================================================
+
+#QUERY FUNCTION
+
 @inngest_client.create_function(
     fn_id="RAG: Query PDF",
     trigger=inngest.TriggerEvent(event="rag/query_pdf_ai"),
@@ -144,9 +144,8 @@ Answer concisely and accurately based on the context above."""
     }
 
 
-# =============================================================================
-# 🔹 SUMMARISE FUNCTION (bonus — summarises a whole ingested PDF)
-# =============================================================================
+#SUMMARISE FUNCTION (bonus — summarises a whole ingested PDF)
+
 @inngest_client.create_function(
     fn_id="RAG: Summarise PDF",
     trigger=inngest.TriggerEvent(event="rag/summarise_pdf"),
